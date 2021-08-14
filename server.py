@@ -18,12 +18,16 @@ def start(update: tg.Update, context: tg_ext.CallbackContext):
                    [tg.KeyboardButton(text="/volume_up"), tg.KeyboardButton(text="/volume_mute"),
                     tg.KeyboardButton(text="/volume_down")],
                    [tg.KeyboardButton(text="/left"), tg.KeyboardButton(text="/right")],
-                   [tg.KeyboardButton(text="/turn_off")],
 
                    ]
     reply_markup = tg.ReplyKeyboardMarkup(list_button)
 
-    update.message.reply_text("Hello", reply_markup=reply_markup)
+    start_message = f'Hello, {update.effective_user.first_name}!\n' \
+                    f'This bot will help you remotely control your computer while watching YouTube, movies, etc.\n' \
+                    f'The bot knows how to press the buttons "right", "left", "space", "increase sound",' \
+                    f' "decrease sound" and "disable sound" on your keyboard.'
+
+    update.message.reply_text(start_message, reply_markup=reply_markup)
 
 
 dispatcher.add_handler(tg_ext.CommandHandler("start", callback=start))
